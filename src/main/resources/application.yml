@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: dear-comrade-security-zero-to-hero
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
+
+
