@@ -1,14 +1,6 @@
 spring:
   application:
     name: dear-comrade-security-zero-to-hero
-  datasource:
-    url: jdbc:postgresql://172.21.0.2:5432/dha
-    username: comrade
-    password: dear
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
 logging:
   level:
     org:
@@ -16,4 +8,13 @@ logging:
         security: debug
 
 
-
+reactjs:
+  web:
+    base-url: http://localhost:5173
+    path: '/**'
+    methods: DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+  security:
+    secret-key: dhaasajsjajsjashajsjajsashawueu8wue8uuwuiwejwnj3848348723723723878329490
+    expiration-duration: 120000
+    token-header: Authorization
+    token-prefix: "Bearer "
