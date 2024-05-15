@@ -1,7 +1,6 @@
 package com.comrade.config;
 
-import com.comrade.config.entrypoint.JwtAuthenticationEntryPoint;
-import com.comrade.config.filter.ApiKeyFilter;
+
 import com.comrade.config.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +21,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class DhaSecurityConfiguration {
 
     @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    @Autowired
     private CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Value("${reactjs.security.secret-key}")
@@ -33,16 +30,33 @@ public class DhaSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(new ApiKeyFilter(key), BasicAuthenticationFilter.class)
-                .authorizeHttpRequests(authorise->authorise.anyRequest().authenticated())
+                .authorizeHttpRequests(authorize->authorize
+                                .anyRequest()
+                                //.hasRole("ADMIN")
+                                //.hasAuthority("read")
+                                //.hasAnyRole("USER")
+                                //.hasAnyAuthority("write")
+                                //.permitAll()
+                                //.denyAll()
+                                .authenticated()
+                        )
                 .build();
     }
 
     @Bean
     public UserDetailsService userDetailsService(){
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-        UserDetails userDetails = User.builder().username("shiva").password("shiva").authorities("read").build();
-        inMemoryUserDetailsManager.createUser(userDetails);
+        UserDetails userDetailsOne = User.builder().username("shiva").password("shiva").authorities("read").build();
+        UserDetails userDetailsTwo = User.builder().username("dasari").password("dasari").authorities("write").build();
+
+        /*
+        * role and authorities both use same contract GrantedAuthority
+        * When working with roles.
+        * roles --> ADMIN,USER
+        * authorities --> ROLE_ADMIN,ROLE_USER
+        * */
+        inMemoryUserDetailsManager.createUser(userDetailsOne);
+        inMemoryUserDetailsManager.createUser(userDetailsTwo);
         return inMemoryUserDetailsManager;
     }
     @Bean
