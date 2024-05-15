@@ -19,6 +19,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
 
         InvalidLoginResponse loginResponse=new InvalidLoginResponse();
+        loginResponse.setMessage(authException.getMessage());
         String jsonLoginResponse=new Gson().toJson(loginResponse);
         response.setContentType("application/json");
         response.setStatus(401);
