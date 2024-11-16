@@ -2,6 +2,7 @@ package com.comrade.model;
 
 import java.util.Date;
 
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,6 +15,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class HttpResponse {
 	private Integer httpStatusCode;
 	private HttpStatus httpStatus;
@@ -21,5 +23,6 @@ public class HttpResponse {
 	private String message;
 	@JsonFormat(shape = Shape.STRING,pattern = "MM-dd-yyyy hh:mm:ss")
 	private Date timeStamp;
+
 
 }

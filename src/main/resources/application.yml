@@ -1,0 +1,14 @@
+server:
+  shutdown: GRACEFUL
+  port: 8048
+spring:
+  application:
+    name: dear-comrade-security-zero-to-hero
+  datasource:
+    username: comrade
+    password: dear
+    url: jdbc:postgresql://localhost:5432/dha
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
