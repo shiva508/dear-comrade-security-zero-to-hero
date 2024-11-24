@@ -25,7 +25,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		HttpResponse httpResponse =HttpResponse.builder()
 											   .httpStatusCode(HttpStatus.UNAUTHORIZED.value())
 											   .httpStatus(HttpStatus.UNAUTHORIZED)
-											   .message("ACCESS DENAIED")
+											   .message("ACCESS DENIED")
 											   .reason(HttpStatus.UNAUTHORIZED.getReasonPhrase())
 											   .timeStamp(new Date()).build();
 		

@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 @Slf4j
 public class DearComradeSecurityZeroToHeroApplication {
@@ -24,7 +26,12 @@ public class DearComradeSecurityZeroToHeroApplication {
 												  .password("shiva")
 												  .roles("ROLE_USER,ROLE_ADMIN")
 												  .build();
-			UserProfile save = userProfileRepository.save(userProfile);
+			UserProfile userProfile_1 =  UserProfile.builder()
+					.username("dasari")
+					.password("dasari")
+					.roles("ROLE_USER")
+					.build();
+			List<UserProfile> save = userProfileRepository.saveAll(List.of(userProfile,userProfile_1));
 			log.info("applicationRunner:: {}",save);
 		};
 	}

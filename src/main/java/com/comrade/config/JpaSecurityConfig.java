@@ -38,10 +38,15 @@ public class JpaSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		return http.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/posts/**").permitAll().anyRequest().authenticated())
+				.authorizeHttpRequests(auth ->
+						//auth.requestMatchers("/api/posts/**")
+												   //.permitAll()
+						auth.anyRequest()
+													.authenticated())
 				.userDetailsService(userProfileService)
 				.httpBasic(Customizer.withDefaults())
 				.exceptionHandling(hsehc -> hsehc.accessDeniedHandler(deniedHandler))
+				.formLogin(form ->form.failureHandler(customAuthenticationFailureHandler))
 				.build();
 		/*
 		return http

@@ -24,7 +24,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		HttpResponse httpResponse = HttpResponse.builder()
 												.httpStatusCode(HttpStatus.UNAUTHORIZED.value())
 												.httpStatus(HttpStatus.UNAUTHORIZED)
-												.message("AUTHENTICATION FAILUE")
+												.message("AUTHENTICATION FAILURE")
 												.reason(HttpStatus.UNAUTHORIZED.getReasonPhrase())
 												.timeStamp(new Date()).build();
 
